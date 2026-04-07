@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/config.php';
 // ── AJAX: edit order — must be before any output ───────────────────────────
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ajax_edit'])) {
     requireLogin();
+$license = requireLicense($pdo);
     header('Content-Type: application/json; charset=utf-8');
 
     $orderId  = intval($_POST['order_id'] ?? 0);
@@ -311,7 +312,7 @@ function buildReceiptHtml(data) {
   var font   = IS_RTL ? 'Tajawal,Arial,sans-serif' : 'inherit';
 
   var logoHtml = APP_LOGO
-    ? '<img src="'+ "assets/" + APP_LOGO + '" style="width:180px;height:180px;border-radius:10px;object-fit:cover;display:block;margin:0 auto 10px;">'
+    ? '<img src="' + APP_LOGO + '" style="width:62px;height:62px;border-radius:10px;object-fit:cover;display:block;margin:0 auto 10px;">'
     : '';
 
   var dateStr = '';

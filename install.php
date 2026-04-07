@@ -137,6 +137,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $step === 2) {
             $db->prepare("INSERT INTO users (username, password) VALUES (?, ?)")
                ->execute([$admin_user, $hash]);
 
+            // ── Save install date (trial start) ──
+            $db->prepare("INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)")
+               ->execute(['install_date', date('Y-m-d H:i:s')]);
+            $db->prepare("INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)")
+               ->execute(['license_status', 'trial']);
+
             // ── Write lock file ──
             file_put_contents(INSTALL_LOCK, date('Y-m-d H:i:s'));
 
@@ -290,7 +296,7 @@ body { font-family:'DM Sans',sans-serif; background:#f5f4f0; min-height:100vh; d
                  placeholder="http://localhost/restaurant-sqlite"
                  required>
           <div class="form-text" style="font-size:.78rem;color:#999;margin-top:5px;">
-            Examples: &nbsp;<code>http://localhost/myapp</code> &nbsp;·&nbsp; <code>https://pos.myrestaurant.com</code>
+            the app have to be in: &nbsp;<code>http://localhost/</code> &nbsp;·&nbsp;
             <br>No trailing slash. This is used for all internal links and redirects.
           </div>
         </div>
@@ -346,11 +352,7 @@ body { font-family:'DM Sans',sans-serif; background:#f5f4f0; min-height:100vh; d
     </div>
   </div>
   <p class="text-center text-muted mt-3" style="font-size:.75rem;">
-    
-<div class="container text-center fixed-bottom mw-100" style="font-size:.8rem;color:#aaa;padding:6px 0;">
-  &copy; <?= date('Y') ?> &nbsp;|&nbsp;
-  Developed by <a href="developer.php" style="color:#C8860A;text-decoration:none;font-weight:600;">A6h9</a>
-</div>
+    Restaurant POS — SQLite Edition
   </p>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

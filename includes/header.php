@@ -30,6 +30,7 @@ $nav = $nav_translations[$lang] ?? $nav_translations['en'];
 
 $currentPage = basename($_SERVER['PHP_SELF']);
 $B = BASE_URL; // shorthand
+$license = $license ?? ['status' => 'trial', 'days_left' => 30];
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>" dir="<?= $dir ?>">
@@ -132,3 +133,19 @@ body { font-family: var(--font-main); background: #f5f4f0; color: #1a1a1a; min-h
 </div>
 
 <div class="main-content">
+
+<?php if ($license['status'] === 'trial'): ?>
+<div style="background:linear-gradient(90deg,#c8860a,#e6a020);color:#fff;padding:10px 20px;display:flex;align-items:center;justify-content:space-between;border-radius:10px;margin-bottom:20px;font-size:.85rem;flex-wrap:wrap;gap:8px;">
+  <span>
+    <i class="bi bi-clock me-1"></i>
+    <?= $lang === 'ar' ? 'وضع التجربة المجانية' : 'Free Trial' ?> —
+    <strong><?= $license['days_left'] ?></strong>
+    <?= $lang === 'ar' ? ' يوم متبقي' : ' day' . ($license['days_left'] == 1 ? '' : 's') . ' remaining' ?>
+  </span>
+  <a href="<?= $B ?>/activate.php"
+     style="background:#fff;color:#c8860a;border-radius:6px;padding:5px 14px;font-weight:600;font-size:.82rem;text-decoration:none;white-space:nowrap;">
+    <?= $lang === 'ar' ? '🔓 تفعيل الآن — $10' : '🔓 Activate Now — $10 lifetime' ?>
+  </a>
+</div>
+<?php endif; ?>
+

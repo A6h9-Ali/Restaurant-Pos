@@ -63,6 +63,9 @@ function sanitize(string $str): string {
     return htmlspecialchars(strip_tags(trim($str)), ENT_QUOTES, 'UTF-8');
 }
 
+// ── License system ────────────────────────────────────────────────────────
+require_once __DIR__ . '/license.php';
+
 function generateOrderNumber(): string {
     return 'ORD-' . strtoupper(substr(uniqid(), -6));
 }

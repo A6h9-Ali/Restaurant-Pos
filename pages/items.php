@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/config.php';
 requireLogin();
+$license = requireLicense($pdo);
 
 $settings        = getSettings($pdo);
 $lang            = in_array(trim($settings['language'] ?? ''), ['en','ar']) ? trim($settings['language']) : 'en';

@@ -21,7 +21,7 @@ function showToast(msg, type = 'success') {
 }
 </script>
 
-<div class="container text-center fixed-bottom mw-100" style="font-size:.8rem;color:#aaa;padding:6px 0;">
+<div class="container text-center fixed-bottom mw-100 z-n1" style="font-size:.8rem;color:#aaa;padding:6px 0;">
   &copy; <?= date('Y') ?> &nbsp;|&nbsp;
   Developed by <a href="../developer.php" style="color:#C8860A;text-decoration:none;font-weight:600;">A6h9</a>
 </div>
